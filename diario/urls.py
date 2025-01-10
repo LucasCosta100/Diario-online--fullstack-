@@ -1,0 +1,6 @@
+from django.urls import path #função path do django para criar urls
+from . import views
+
+urlpatterns = [
+    path("", views.home)
+]

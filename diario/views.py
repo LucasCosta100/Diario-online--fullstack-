@@ -5,7 +5,15 @@ from datetime import datetime, timedelta
 
 def home(request):
     textos = Diario.objects.all().order_by("create_at")[:3]
-    return render(request, "home.html", {"textos": textos})
+    pessoas = Pessoa.objects.all()
+    nomes = [pessoa.nome for pessoa in pessoas]
+    qtds = []
+    for pessoa in pessoas:
+        qtd = Diario.objects.filter(pessoas=pessoa).count()
+        qtds.append(qtd)
+    
+    
+    return render(request, "home.html", {"textos":textos, "nomes":nomes, "qtds":qtds})
 
 def escrever(request):
     if request.method == "GET":

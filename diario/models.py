@@ -16,3 +16,10 @@ class Diario(models.Model):
     
     def __str__ (self):
         return self.titulo
+    
+    def get_tags(self):
+        return self.tags.split(",") if self.tags else[]
+    
+    def set_tags(self, list_tags, reset=False):
+        if not reset:
+            existing_tags = set(self.get_tags())

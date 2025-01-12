@@ -3,7 +3,8 @@ from django.http import HttpResponse
 from .models import Pessoa, Diario
 
 def home(request):
-    return render(request, "home.html")
+    textos = Diario.objects.all().order_by("create_at")[:3]
+    return render(request, "home.html", {"textos": textos})
 
 def escrever(request):
     if request.method == "GET":

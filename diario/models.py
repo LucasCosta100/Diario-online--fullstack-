@@ -23,3 +23,6 @@ class Diario(models.Model):
     def set_tags(self, list_tags, reset=False):
         if not reset:
             existing_tags = set(self.get_tags())
+            list_tags = existing_tags.union(set(list_tags)) #union serve para juntar informaçoes que ja existem, para não se repetir
+            
+        self.tags = ",".join(list_tags)
